@@ -1,42 +1,44 @@
-/* Sokomo Kudiome — dados do personagem. O motor está em ../../shared/sheet.js.
+/* Sokomo Kudiome — dados do personagem (Bardo 3 / Paladino 1). O motor está em ../../shared/sheet.js.
    Chaves entre {chaves} viram números calculados: {dc}, {spellAtk}, {prof}, {level},
    {cha}/{chaS} (modificador), {sk_persuasao} (perícia), {atk_dag}/{dmg_dag} (ataque
    com id "dag"), {ac}, {ini} e as de extraVars abaixo. */
 window.CHAR = {
   id:'sokomo',
   name:'Sokomo Kudiome',
-  subtitle:'Humano · Bardo (Colégio do Conhecimento) · Nível {level} · Nobre · 25 anos',
-  level:3, speed:'9m', hitDie:8, hpMax:16,
+  subtitle:'Humano · Bardo 3 (Colégio do Conhecimento) / Paladino 1 · Nível {level} · Nobre · 25 anos',
+  level:4, speed:'9m', hitDie:8, hpMax:23,
   scores:{str:8,dex:15,con:13,int:15,wis:13,cha:17},
   scoresNote:'Humano: +1 em todos os atributos (já aplicados).',
   saves:['dex','cha'],
-  savesNote:'Bardo é proficiente em Destreza e Carisma. Rola-se 1d20 + modificador contra a CD do efeito. Versatilidade não vale para testes de resistência.',
+  savesNote:'Bardo é proficiente em Destreza e Carisma. Rola-se 1d20 + modificador contra a CD do efeito. Versatilidade não vale para testes de resistência. Multiclasse em Paladino não concede as proficiências de resistência do Paladino.',
   skills:{'Arcanismo':'prof','Atuação':'prof','Enganação':'prof','História':'prof','Percepção':'prof','Persuasão':'expert','Prestidigitação':'expert','Religião':'prof'},
   jackOfAllTrades:true,
-  skillsNote:'Origem: Bardo (3 à escolha) · Nobre (História, Persuasão) · Colégio do Conhecimento (3 bônus). Dois pontos = Aptidão (proficiência dobrada): Persuasão e Prestidigitação. Versatilidade: +{half} em toda perícia sem proficiência (já somado acima).',
+  skillsNote:'Origem: Bardo (3 à escolha) · Nobre (História, Persuasão) · Colégio do Conhecimento (3 bônus). Dois pontos = Aptidão (proficiência dobrada): Persuasão e Prestidigitação. Versatilidade: +{half} em toda perícia sem proficiência (já somado acima). Multiclasse em Paladino não dá perícias novas.',
   proficiencies:[
-    ['Armaduras','Leves'],
-    ['Armas','Simples, bestas de mão, espadas longas, rapieiras, espadas curtas'],
+    ['Armaduras','Leves, médias e escudos (Paladino, por multiclasse)'],
+    ['Armas','Simples e marciais; bestas de mão, espadas longas, rapieiras, espadas curtas (Bardo)'],
     ['Ferramentas','Três instrumentos musicais (à escolha) · um tipo de jogo (Nobre)'],
     ['Idiomas','Comum, Élfico, Halfling'],
   ],
-  proficienciesNote:'Sem proficiência na armadura vestida, não se conjura magias — por isso só armaduras leves aparecem na aba Mais. Versatilidade dá +{half} em ferramentas e instrumentos sem proficiência.',
+  proficienciesNote:'Sem proficiência na armadura vestida, não se conjura magias. Com o nível de Paladino você passa a ter proficiência em armaduras médias e escudos, então pode conjurar usando-os. Versatilidade dá +{half} em ferramentas e instrumentos sem proficiência.',
   armorDefault:'leather',
   armorOptions:['none','padded','leather','studded'],
   coins:{gp:'57',sp:'10'},
   items:'Adaga, armadura de couro, instrumento musical, roupas finas, anel de sinete, pergaminho de linhagem, mochila.',
   personality:'',
-  hpNote:'Dano consome PV temporários primeiro. Bardo: d8 por nível (1º nível = 8 + Con; depois 1d8 + Con ou 5 + Con por nível). A ficha de papel anota 1d8 + 6 + 2 = 16; somando o +1 de Constituição de cada nível daria 19 — confirmar com o mestre e ajustar o máximo.',
-  shortRestMsg:'Descanso curto concluído. Canção do Descanso: quem gastar dados de vida cura +1d6.',
+  hpNote:'Dano consome PV temporários primeiro. Dados de vida: 3d8 de Bardo e 1d10 de Paladino. O 1º nível de Paladino (multiclasse) rola 1d10 + Con (média 6 + 1 = 7): 16 + 7 = 23. Se você rolou o dado, ajuste o máximo. A ficha de papel do nível 3 anota 1d8 + 6 + 2 = 16; somando o +1 de Constituição de cada nível daria 19 — confirmar com o mestre.',
+  shortRestMsg:'Descanso curto concluído. Canção do Descanso: quem gastar dados de vida cura +1d6. Você tem dados de vida d8 (Bardo) e d10 (Paladino).',
 
   spellcasting:{
     title:'Conjuração — Bardo', ability:'cha', slots:[4,2], slotRecharge:'long',
-    note:'Truques conhecidos: 2 · Magias conhecidas: 6 (pode trocar 1 ao subir de nível). Espaços voltam só no descanso longo. Magia de 1º nível pode ser conjurada com espaço de 2º (Sussurros Dissonantes vira 4d6). Ritual: Detectar Magia pode ser conjurada sem gastar espaço, levando 10 minutos a mais. Foco: um instrumento musical.'
+    note:'Truques conhecidos: 2 · Magias conhecidas: 6 (pode trocar 1 ao subir de nível). Espaços voltam só no descanso longo. Magia de 1º nível pode ser conjurada com espaço de 2º (Sussurros Dissonantes vira 4d6). Ritual: Detectar Magia pode ser conjurada sem gastar espaço, levando 10 minutos a mais. Foco: um instrumento musical. O 1º nível de Paladino não dá Conjuração (ela começa no 2º nível de Paladino), então os espaços continuam sendo só os do Bardo 3.'
   },
   resources:[
     {id:'insp', name:'Inspiração de Bardo', sub:'d6 · ação bônus · {inspUses} usos · descanso longo', total:c=>Math.max(1,c.cha), recharge:'long'},
+    {id:'sense', name:'Sentido Divino', sub:'ação · {senseUses} usos · descanso longo', total:c=>Math.max(1,1+c.cha), recharge:'long'},
+    {id:'loh', name:'Mãos Consagradas', sub:'reserva de {lohPool} PV (1 pip = 1 PV) · ação · descanso longo', total:5, recharge:'long'},
   ],
-  extraVars: c => ({ half: Math.floor(c.prof/2), inspUses: Math.max(1, c.cha), inspDie:'d6', restDie:'d6' }),
+  extraVars: c => ({ half: Math.floor(c.prof/2), inspUses: Math.max(1, c.cha), senseUses: Math.max(1, 1 + c.cha), lohPool: 5, inspDie:'d6', restDie:'d6' }),
 
   attacks:[
     {id:'dag', name:'Adaga', ability:'dex', dice:'1d4', type:'perfurante', range:'1,5 m · arremesso 6/18 m'},
@@ -60,6 +62,8 @@ window.CHAR = {
     { title:'Ação', sub:'Uma por turno', body:`<ul>
       <li><b>Atacar</b> — adaga ({atk_dag}, {dmg_dag}), corpo a corpo ou arremessada.</li>
       <li><b>Conjurar</b> — Sussurros Dissonantes (CD {dc}, 3d6), Riso Histérico, Enfeitiçar Pessoa, Sugestão, Zona da Verdade, Detectar Magia; truques Amizade e Prestidigitação.</li>
+      <li><b>Mãos Consagradas</b> — toca uma criatura e devolve PV da reserva de {lohPool} (ou gasta 5 para curar doença ou veneno).</li>
+      <li><b>Sentido Divino</b> — até o fim do seu próximo turno, sente celestiais, corruptores e mortos-vivos a até 18 m ({senseUses} usos).</li>
       <li><b>Gerais</b> — Disparada (dobra o movimento), Desengajar (sem ataques de oportunidade), Esquivar (ataques contra você com desvantagem; TR de Des com vantagem), Ajudar, Esconder (Furtividade {sk_furtividade}), Procurar (Percepção {sk_percepcao}), Usar um objeto.</li></ul>` },
     { title:'Ação bônus', sub:'Uma por turno, só se algo conceder', body:`<ul>
       <li><b>Inspiração de Bardo</b> — um aliado a até 18 m que possa ouvi-lo ganha um {inspDie} para somar a um ataque, teste ou resistência nos próximos 10 minutos. {inspUses} usos por descanso longo.</li>
@@ -76,7 +80,7 @@ window.CHAR = {
       <li><b>Escuridão / invisível:</b> ataques contra o que não vê têm desvantagem; ataques de quem não é visto têm vantagem. Humano não tem visão no escuro.</li>
       <li><b>0 PV:</b> cai inconsciente. No início de cada turno seu, rola d20: 10+ sucesso, 9− falha; 3 sucessos estabiliza, 3 falhas morre. 1 natural = 2 falhas; 20 natural = volta com 1 PV. Sofrer dano a 0 PV = 1 falha (2 se crítico). Alguém pode estabilizá-lo com Sabedoria (Medicina) CD 10.</li>
       <li><b>Morte instantânea:</b> dano que leve a 0 PV com sobra igual ou maior que o PV máximo mata na hora.</li>
-      <li><b>Descanso curto</b> (1 h): gaste dados de vida (1d8 {conS} cada) e, se você tocar, cada um que gastar dados cura +{restDie} (Canção do Descanso). Espaços de Bardo <b>não</b> voltam. <b>Descanso longo</b> (8 h): todos os PV, espaços, Inspirações e metade dos dados de vida (mínimo 1).</li></ul>` },
+      <li><b>Descanso curto</b> (1 h): gaste dados de vida (d8 do Bardo ou d10 do Paladino, + {conS} cada) e, se você tocar, cada um que gastar dados cura +{restDie} (Canção do Descanso). Espaços de Bardo <b>não</b> voltam. <b>Descanso longo</b> (8 h): todos os PV, espaços, Inspirações, usos de Sentido Divino, a reserva de Mãos Consagradas e metade dos dados de vida (mínimo 1).</li></ul>` },
   ],
 
   spellSections:[
@@ -147,7 +151,7 @@ window.CHAR = {
       { name:'Aumento de atributo', use:'passive', sub:'Passivo', desc:['Todos os seus valores de atributo aumentam em 1.'], mine:'<b>Já aplicado</b> nos valores da aba Atributos.' },
       { name:'Idade, tamanho, deslocamento e idiomas', use:'passive', sub:'Passivo', desc:['Humanos atingem a maturidade no fim da adolescência e vivem menos de um século. São Médios, com 1,5 m a mais de 1,8 m de altura. Deslocamento base de 9 m. Falam, leem e escrevem Comum e um idioma extra à escolha.'], mine:'<b>Idioma extra:</b> Élfico. Sem visão no escuro.' },
     ]},
-    { group:'Classe — Bardo', src:"Player's Handbook · nível {level}", items:[
+    { group:'Classe — Bardo 3', src:"Player's Handbook · Bardo nível 3", items:[
       { name:'Conjuração', use:'passive', sub:'Nível 1', desc:[
         'Você aprendeu a desembaraçar e remodelar o tecido da realidade em harmonia com seus desejos e sua música. Suas magias fazem parte do seu vasto repertório, uma magia que você pode ajustar a diferentes situações.',
         'Truques: você conhece dois truques da lista do Bardo (mais um no 4º e no 10º nível). Espaços de magia: a tabela do Bardo mostra quantos espaços você tem para conjurar magias de 1º nível ou superior. Você recupera todos os espaços gastos ao terminar um descanso longo.',
@@ -170,6 +174,20 @@ window.CHAR = {
         'Você aprende a usar sua sagacidade para distrair, confundir e minar a confiança e a competência dos outros. Quando uma criatura que você possa ver a até 18 m de você faz uma jogada de ataque, um teste de atributo ou uma jogada de dano, você pode usar sua reação para gastar um dos seus usos de Inspiração de Bardo, rolando o dado e subtraindo o resultado da jogada da criatura.',
         'Você pode escolher usar esta característica depois que a criatura rolar, mas antes de o mestre determinar se a jogada de ataque ou o teste de atributo teve sucesso ou falha, ou antes de a criatura causar o dano. A criatura é imune se não puder ouvi-lo ou se for imune a ser enfeitiçada.'
       ], mine:'<b>Sokomo:</b> −{inspDie} num ataque que acertou por pouco um aliado, ou no dano de um crítico. Usa os mesmos {inspUses} usos da Inspiração — decida se prefere inspirar ou interromper. Gasta a reação, então nada de ataque de oportunidade na mesma rodada.' },
+    ]},
+    { group:'Classe — Paladino 1', src:"Player's Handbook · Paladino nível 1 (multiclasse)", items:[
+      { name:'Multiclasse: Paladino', use:'passive', sub:'Pré-requisito e proficiências', desc:[
+        'Para entrar no Paladino por multiclasse, é preciso ter Força 13 e Carisma 13 (e também Carisma 13 na classe atual, o Bardo). Ao ganhar o primeiro nível de Paladino, você ganha proficiência em armaduras leves, armaduras médias, escudos, armas simples e armas marciais. Você não ganha as perícias nem os testes de resistência do Paladino.',
+        'Os níveis de Paladino só entram na conta dos espaços de magia a partir do 2º nível de Paladino, que soma metade dos seus níveis de Paladino ao nível de conjurador.'
+      ], mine:'<b>Sokomo:</b> Força 8 <b>não cumpre</b> o pré-requisito de Força 13; este multiclasse precisa da aprovação do mestre (regra opcional das mesas). Carisma 17 cumpre o outro. Dados de vida: d10 no nível de Paladino.' },
+      { name:'Sentido Divino', use:'action', sub:'Nível 1 · ação · {senseUses} usos', desc:[
+        'A presença de mal poderoso se registra nos seus sentidos como um odor nocivo, e o bem poderoso soa como música celestial. Como ação, você pode abrir sua consciência para detectar essas forças. Até o fim do seu próximo turno, você sabe a localização de qualquer celestial, corruptor ou morto-vivo a até 18 m de você que não esteja com cobertura total. Você sabe o tipo (celestial, corruptor ou morto-vivo) de qualquer ser cuja presença sentir, mas não sua identidade. Dentro do mesmo raio, você também detecta a presença de qualquer lugar ou objeto que tenha sido consagrado ou profanado, como pela magia santificar.',
+        'Você pode usar esta característica um número de vezes igual a 1 + seu modificador de Carisma. Ao terminar um descanso longo, você recupera todos os usos gastos.'
+      ], mine:'<b>Sokomo:</b> <b>{senseUses}</b> usos por descanso longo (1 + Carisma), marcados na aba Combate. Não diz quem é a criatura nem se é hostil, só a posição e o tipo.' },
+      { name:'Mãos Consagradas', use:'action', sub:'Nível 1 · ação · reserva de {lohPool} PV', desc:[
+        'Seu toque abençoado pode curar ferimentos. Você tem uma reserva de poder de cura que se reabastece quando você termina um descanso longo. Com essa reserva, você pode restaurar um número total de pontos de vida igual ao seu nível de Paladino × 5.',
+        'Como ação, você pode tocar uma criatura e sacar poder da reserva para restaurar pontos de vida a ela, até o máximo restante na reserva. Alternativamente, você pode gastar 5 pontos de vida da reserva para curar o alvo de uma doença ou neutralizar um veneno que o afete. Você pode curar várias doenças e neutralizar vários venenos com um único uso, gastando pontos de vida separadamente para cada um. Esta característica não tem efeito em mortos-vivos e constructos.'
+      ], mine:'<b>Sokomo:</b> reserva de <b>{lohPool}</b> PV (5 × 1 nível de Paladino), cada pip marca 1 PV gasto. Precisa tocar o alvo, então é curta distância. Útil para levantar um aliado que caiu a 0 PV.' },
     ]},
     { group:'Antecedente — Nobre', src:"Player's Handbook", items:[
       { name:'Posição de Privilégio', use:'social', sub:'Característica de antecedente', desc:['Graças ao seu nascimento nobre, as pessoas tendem a pensar o melhor de você. Você é bem-vindo na alta sociedade, e as pessoas presumem que você tem o direito de estar onde está. O povo comum faz todo o esforço para acomodá-lo e evitar seu desagrado, e outras pessoas de nascimento nobre o tratam como membro da mesma esfera social. Você pode conseguir uma audiência com um nobre local, se precisar.'],
